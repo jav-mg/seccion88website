@@ -4,47 +4,48 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untitled</title>
+    <title>Untitled</title>    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body>
-    <div class="team-boxed">
+<body>    
+    <div class="team-boxed">        
         <div class="container">
             <div class="intro">
                 <h2 class="text-center">Cafe and Wifi Website</h2>
                 <p class="text-center">Build a website that lists cafes with wifi and power for remote working.</p>
             </div>
+
+            <div class="text-center">                
+                <a href="{{url_for('nuevoCafe')}}" class="btn btn-primary">+ New Coffee Shop</a>
+            </div>
+            
             <div class="row people">
+                {% for cafe in cafes%}
                 <div class="col-md-6 col-lg-4 item">
-                    <div class="box"><img class="rounded-circle" src="{{ url_for('static', filename= 'assets/1.jpg') }}">
-                        <h3 class="name">Ben Johnson</h3>
-                        <p class="title">Musician</p>
-                        <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
-                        <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
+                    <div class="box"><img src="{{ cafe['cafe_img_url'] }}">
+                        <h3 class="name">{{ cafe['cafe_name'] }}</h3>
+                        <p class="title">{{ cafe['cafe_location'] }}</p>
+                        <p class="description">
+                            <ul>
+                                <li>Sockets:  {% if cafe['cafe_has_sockets'] %} Yes {% else %} No {% endif %}</li>
+                                <li>Toilet:  {% if cafe['cafe_has_toilet'] %} Yes {% else %} No {% endif %}</li>
+                                <li>Wifi:  {% if cafe['cafe_has_wifi'] %} Yes {% else %} No {% endif %}</li>
+                                <li>Can take calls:  {% if cafe['cafe_can_take_Calls'] %} Yes {% else %} No {% endif %}</li>
+                                <li>Seats:  {{ cafe['cafe_seats'] }}</li>
+                                <li>Coffee Price:  {{ cafe['cafe_coffee_price'] }}</li>
+                                <li><a href="{{ url_for('eliminarCafe', id=cafe['cafe_id']) }}" class="btn btn-danger">Delete Coffee Shop</a></li>
+                            </ul>
+                        </p>                        
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 item">
-                    <div class="box"><img class="rounded-circle" src="{{ url_for('static', filename= 'assets/2.jpg') }}">
-                        <h3 class="name">Emily Clark</h3>
-                        <p class="title">Artist</p>
-                        <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
-                        <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 item">
-                    <div class="box"><img class="rounded-circle" src="{{ url_for('static', filename= 'assets/3.jpg') }}">
-                        <h3 class="name">Carl Kent</h3>
-                        <p class="title">Stylist</p>
-                        <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p>
-                        <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </body>

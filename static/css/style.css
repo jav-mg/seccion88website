@@ -69,7 +69,7 @@
   }
   
   .team-boxed .item img {
-    max-width:160px;
+    max-width:300px;
   }
   
   .team-boxed .social {
@@ -88,4 +88,18 @@
     opacity:1;
   }
   
-  
+   /* Quita los bullets de las listas */
+   ul, ol {
+    list-style: none;
+    padding-left: 0;
+}
+
+.box img {
+  width: 300px; /* Establece el ancho deseado */
+  height: 200px; /* Establece la altura deseada */
+  border-radius: 8px; /* Redondear ligeramente las esquinas */
+}
+
+.box {
+  height: 570px; /* Establece una altura fija para los elementos .box */
+}
